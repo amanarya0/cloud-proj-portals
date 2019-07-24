@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .page-header {
+      text-align: center;
+      background: bisque;
+    }
+
+    .form {
+      width: 50%;
+      margin-left: 25%;
+    }
+
+    #appErr,
+    #appSuc {
+      width: 50%;
+      margin-left: 25%;
+    }
+  </style>
+  <script>
+    function applyBMR() {
+      var endpoint = 'https://realestate-frontend-project.herokuapp.com/appraisal/request';
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="page-header">
+    <h1 class="h1 mb-4">Welcome to MBR</h1>
+  </div>
+  <div id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="text-center border border-light p-5 form">
+
+      <p class="h4 mb-4">Mortgage Request Form</p>
+      <div class="form-field">
+
+
+        <!-- MSID -->
+        <div class="form-input">
+          <input type="text" id="msid" class="form-control mb-4" placeholder="Mortgage Unique Id" name="msid">
+        </div>
+
+        <!-- Mortgage Value -->
+        <div class="form-input">
+          <input type="text" id="mortVal" class="form-control mb-4" placeholder="Mortgage Value" name="mortVal">
+        </div>
+
+
+        <!-- Name -->
+        <div class="form-input">
+          <input type="text" id="name" class="form-control mb-4" placeholder="Name" name="name">
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="form-input">
+          <button class="btn btn-info btn-block my-4" type="submit" onclick="applyBMR()">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <div style='display: none' class="alert alert-danger alert-dismissible fade show" id="appErr">
+      <strong>Error!</strong>
+      <div id="form-response-error"></div>
+    </div>
+
+    <div style='display: none' class="alert alert-success alert-dismissible fade show" id="appSuc">
+      <strong>Success!</strong>
+      <div id="form-response-success"></div>
+      <div id="mortgage-id"></div>
+    </div>
+
+
+
+  </div>
+
+</body>
+
+</html>

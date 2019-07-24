@@ -22,7 +22,7 @@ module.exports.routes = {
     '/': { view: 'pages/homepage' },
     '/login': { view: 'pages/employer_login' },
     '/mbr': { view: 'pages/mbr-form' },
-
+    '/realestate-app': { view: 'pages/realestate-app'},
 
     /***************************************************************************
     *                                                                          *
