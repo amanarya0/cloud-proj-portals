@@ -20,6 +20,10 @@ module.exports.routes = {
     ***************************************************************************/
 
     '/insinc': { view: 'pages/insinc' },
+    '/login': { view: 'pages/employer_login' },
+    '/mbr': { view: 'pages/mbr-form' },
+    '/mbrstatus': { view: 'pages/mbr-status' },
+
 
 
     /***************************************************************************
@@ -32,6 +36,12 @@ module.exports.routes = {
     * not match any of those, it is matched against static assets.             *
     *                                                                          *
     ***************************************************************************/
-
-
+    /***************************************************************************
+    *                                                                          *
+    * Make the view located at `views/homepage.ejs` your home page.            *
+    *                                                                          *
+    * (Alternatively, remove this and add an `index.html` file in your         *
+    * `assets` directory)                                                      *
+    *                                                                          *
+    ***************************************************************************/
 };
