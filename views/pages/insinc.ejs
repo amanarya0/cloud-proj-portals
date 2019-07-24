@@ -1,0 +1,151 @@
+<meta charset="UTF-8">
+<title>INSinc Insurance</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    .header .h1 {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        padding: 36px;
+        background-color: blanchedalmond;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .row {
+        margin-top: 24px;
+    }
+
+    .al-right {
+        text-align: right;
+    }
+
+    #response {
+        display: none;
+    }
+
+    #error {
+        text-align: center;
+        color: red;
+        display: none;
+    }
+</style>
+<script>
+    function getApplication() {
+        var url = "https://insurance-frontend-project.herokuapp.com/insurance/quote";
+        var msid = document.getElementById("msid").value;
+        var requestUrl = url + "?m1sid=" + msid;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", requestUrl, true);
+        xhr.setRequestHeader("Content-Type", "application/json; utf-8");
+
+        var idElem = document.getElementById("id");
+        var msidElem = document.getElementById("m1sid");
+        var mortId = document.getElementById("mortid");
+        var insval = document.getElementById("insval");
+        var apprval = document.getElementById("apprval");
+        var deduct = document.getElementById("deduct");
+        var respElem = document.getElementById("response");
+        var err = document.getElementById("error");
+        err.style.display = "none";
+        respElem.style.display = "none";
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                let response = JSON.parse(this.response);
+                console.log(response);
+                idElem.innerText = response.incQuote.id;
+                msidElem.innerText = response.incQuote.m1sid;
+                mortId.innerText = response.incQuote.mortid;
+                insval.innerText = response.incQuote.insuredValue;
+                apprval.innerText = response.incQuote.appraisalValue;
+                deduct.innerText = response.incQuote.deductible;
+                respElem.style.display = "block";
+            } else if (this.readyState === XMLHttpRequest.DONE && this.status === 400) {
+                err.style.display = "block";
+            }
+        }
+        xhr.send();
+    }
+</script>
+<div class="container">
+    <div class="row header">
+        <div class="h1">INSinc Insurance Portal</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <label for="msid" class="col-sm-5 col-form-label al-right">Enter Mortgage ID to get your application status:
+        </label>
+        <div class="col-sm-5">
+            <input id="msid" class="form-control" type="number">
+            <hr>
+            <button class="btn btn-primary" onclick="getApplication()">Get Application</button>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <hr>
+    <hr>
+    <div id="error">
+        Application not found in the database!
+    </div>
+    <div id="response">
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                ID:
+            </div>
+            <div class="col-sm-6" id="id">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                M1SID:
+            </div>
+            <div class="col-sm-6" id="m1sid">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                MORTID:
+            </div>
+            <div class="col-sm-6" id="mortid">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                Insured Value:
+            </div>
+            <div class="col-sm-6" id="insval">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                Appraisal Value:
+            </div>
+            <div class="col-sm-6" id="apprval">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 al-right">
+                Deductible:
+            </div>
+            <div class="col-sm-6" id="deduct">
+
+            </div>
+        </div>
+    </div>
+</div>
