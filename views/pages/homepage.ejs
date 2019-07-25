@@ -281,7 +281,7 @@ For more information, see:
   }
 
   div.links {
-    width: 300px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
     -moz-box-sizing: border-box;
@@ -335,180 +335,34 @@ For more information, see:
     }, 0);
 </script>
 
-<script type="text/javascript">
-    function login() {
-        var password = document.getElementById("password").value;
-        var employeeID = document.getElementById("employeeID").value;
-        var employeeId = parseInt(employeeID, 10);
-        document.getElementById('PWDerror').innerHTML = '';
-        document.getElementById('IDerror').innerHTML = '';
-        if (employeeID != '') {
-            if (password != '') {
-                var xhr = new XMLHttpRequest(),
-                    method = "POST",
-                    url = "https://employer-frontend-project.herokuapp.com/account/login";
-
-                let params = JSON.stringify({ employeeId, password });
-                console.log(params);
-                xhr.open(method, url, true);
-                //window.localStorage.setItem('token',JSON.parse(xhr.responseText).token);
-
-                xhr.onreadystatechange = function () {
-                    try {
-
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            document.getElementById("log").style.display = "none";
-                            document.getElementById("consent").style.display = "block";
-                            window.localStorage.setItem('token', JSON.parse(xhr.responseText).token);
-                            //window.location.replace("/consent_form");
-                        }
-                        else if (xhr.readyState === 4 && xhr.status === 401) {
-                            document.getElementById('output').innerHTML = JSON.parse(xhr.responseText).message;
-                        }
-                        else {
-                            document.getElementById('output').innerHTML = 'Login Email or Password Invalid.';
-                        }
-                    }
-                    catch (err) {
-                        console.log("Bad Request", err);
-                    }
-
-
-                };
-                xhr.setRequestHeader('Content-Type', 'application/json')
-                xhr.send(params);
-
-            }
-            else {
-                document.getElementById('PWDerror').innerHTML = 'Please enter the password';
-                return false;
-            }
-
-        }
-        else {
-            document.getElementById('IDerror').innerHTML = 'Please enter the employee ID';
-            return false;
-        }
-    }
-
-
-
-    function consent() {
-        var urlMBR = document.getElementById("url").value;
-        var mortId = document.getElementById("appNo").value;
-        //var employeeId = document.getElementById("empid").value;
-        var employeeId = document.getElementById("employeeID").value;
-        var consentCheck = document.getElementById("checkbox").checked;
-
-
-        var applicationNo = parseInt(appNo, 10);
-        var consent = JSON.parse(consentCheck);
-        //REFERENCE STARTS------- REGEX TAKEN FROM http://urlregex.com/
-        var regexp = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
-        //REFERENCE ENDS
-        document.getElementById('URLerror').innerHTML = '';
-        document.getElementById('appNumberError').innerHTML = '';
-        document.getElementById('consentError').innerHTML = '';
-        //document.getElementById('empIdError').innerHTML = '';
-
-        //if (employeeId != '') {
-        if (mortId != '') {
-            if (regexp.test(urlMBR) && urlMBR != '') {
-
-                if (consent) {
-                    var xhr = new XMLHttpRequest(),
-                        method = "POST",
-                        url = "https://employer-frontend-project.herokuapp.com/share/apply";
-
-                    let params = JSON.stringify({ mortId, urlMBR, employeeId });
-                    console.log(params);
-                    xhr.open(method, url, true);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            console.log(JSON.parse(xhr.responseText).message);
-                            document.getElementById('output1').innerHTML = JSON.parse(xhr.responseText).message;
-                        }
-                        else if (xhr.readyState === 4 && xhr.status === 409) {
-                            document.getElementById('output1').innerHTML = JSON.parse(xhr.responseText).message;
-                        }
-                        else if (xhr.readyState === 4 && xhr.status === 400) {
-                            document.getElementById('output1').innerHTML = JSON.parse(xhr.responseText).message;
-                        }
-                        else {
-                            document.getElementById('output1').innerHTML = JSON.parse(xhr.responseText).message;
-                        }
-                    };
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + window.localStorage.getItem('token'));
-                    xhr.send(params);
-                }
-                else {
-                    document.getElementById('consentError').innerHTML = 'Please check the checkbox';
-                    return false;
-                }
-            }
-            else {
-                document.getElementById('URLerror').innerHTML = 'Please enter a valid URL';
-                return false;
-            }
-
-        }
-
-        else {
-            document.getElementById('appNumberError').innerHTML = 'Please enter the application number';
-            return false;
-        }
-        // }
-
-        //else {
-        //  document.getElementById('empIdError').innerHTML = 'Please enter the Employee ID';
-        // return false;
-        //}
-    }
-</script>
 
 <div class="default-page">
     <div class="header">
-        <h1 id="main-title" class="container text-center">EMP</h1>
+        <h1 id="main-title" class="container text-center">Group 9:Team Rockers</h1>
     </div>
     <div class="main container clearfix center">
 
-        <div class="links" id="log">
+        <div class="links">
             <div class="link-list">
-                <h4>LOGIN</h4><br />
-                <div>
-                    Employee ID: <br /><input type="text" id="employeeID" name="employeeID"><br>
-                    <div id="IDerror" style="color:red;"></div><br>
-                    Password: <br /><input type="password" id="password" name="password"><br>
-                    <div id="PWDerror" style="color:red;"></div><br>
-                    <div style="text-align: center;">
-                        <button class="btn btn-primary center" onclick="login()">Submit</button></div><br>
-                </div>
-                <br>
-                <div id="output" class="outputmessage"></div>
+                <h4>Project URLs</h4><br /><br />
+                <b>Base URL:</b> https://project-portals.herokuapp.com
+                <br /><br />
+                <b>Insurance Portal:</b> /insinc
+                <br /><br />
+                <b>Employer Portal:</b> /emp/login
+                <br /><br />
+                <b>Mortgage Form Portal:</b> /mbr
+                <br /><br />
+                <b>Mortgage Form Status:</b> /mbrstatus
+                <br /><br />
+                <b>Real Estate Portal:</b> /re/realestate-app
+                <br /><br />
+                <b>Real Estate Appraisal Information:</b> /re/realestate-update-appraisal
+
             </div>
-        </div>
 
 
 
-        <div class="links" id="consent" style="display:none">
-            <div class="link-list">
-                <h4>CONSENT FORM</h4><br />
-                <div>
-                    <!--Employee ID: <br /><input type="text" id="empid" name="empid"><br>
-                    <div id="empIdError" style="color:red;"></div><br>-->
-                    Application number: <br /><input type="text" id="appNo" name="appNo"><br>
-                    <div id="appNumberError" style="color:red;"></div><br>
-                    URL to submit the information: <br /><input type="text" id="url" name="url"><br>
-                    <div id="URLerror" style="color:red;"></div><br />
-                    <input type="checkbox" name="checkbox" id="checkbox" value="check" /> I, hereby, give consent to
-                    "The Big
-                    Company" to share my information with the mortgage broker. <br>
-                    <div id="consentError" style="color:red;"></div><br>
-                    <div style="text-align: center;"><button class="btn btn-primary" onclick="consent()">Agree</button></div><br>
-                </div>
-                <br>
-                <div id="output1"></div>
-            </div>
         </div>
     </div>
+</div>
