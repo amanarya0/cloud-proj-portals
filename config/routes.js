@@ -19,11 +19,12 @@ module.exports.routes = {
     *                                                                          *
     ***************************************************************************/
 
+    '/': { view: 'pages/homepage' },
     '/insinc': { view: 'pages/insinc' },
-    '/login': { view: 'pages/employer_login' },
+    '/emp/login': { view: 'pages/employer_login' },
     '/mbr': { view: 'pages/mbr-form' },
-    '/realestate-app': { view: 'pages/realestate-app'},
-    '/realestate-update-appraisal': { view: 'pages/realestate-update-appraisal'},
+    '/re/realestate-app': { view: 'pages/realestate-app' },
+    '/re/realestate-update-appraisal': { view: 'pages/realestate-update-appraisal' },
     '/mbrstatus': { view: 'pages/mbr-status' },
 
 
