@@ -346,7 +346,7 @@ For more information, see:
             if (password != '') {
                 var xhr = new XMLHttpRequest(),
                     method = "POST",
-                    url = "https://employer-frontend-project.herokuapp.com/account/login";
+                    url = "https://rockers-employer.centralus.cloudapp.azure.com/account/login";
 
                 let params = JSON.stringify({ employeeId, password });
                 console.log(params);
@@ -418,7 +418,7 @@ For more information, see:
                 if (consent) {
                     var xhr = new XMLHttpRequest(),
                         method = "POST",
-                        url = "https://employer-frontend-project.herokuapp.com/share/apply";
+                        url = "https://rockers-employer.centralus.cloudapp.azure.com/share/apply";
 
                     let params = JSON.stringify({ mortId, urlMBR, employeeId });
                     console.log(params);

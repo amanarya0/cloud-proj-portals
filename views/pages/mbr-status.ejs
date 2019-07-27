@@ -1,159 +1,158 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title></title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-<style>
-
-	.page-header{
-		text-align: center;
-		background: bisque;
-	}
-
-	.form{
-		width: 50%;
-    	margin-left: 25%;
-	}
-	.table-container{
-		width: 50%;
-    	text-align: center;
-    	margin-left: 25%;
-	}
-	#appErr{
-		width: 50%;
-    	margin-left: 25%;
-	}
-
-</style>
-
-<script>
-function loginBMR(){
-
-		var mbrid = document.getElementById("mbrid").value;
-        var endpoint = "https://mbr-frontend-project.herokuapp.com/application/status?mortId="+ mbrid;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", endpoint);
-
-        xhr.setRequestHeader("Content-Type", "application/json; utf-8");
-
-        xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-
-                var info = JSON.parse(this.response).status;
-
-                document.getElementById("user-id").innerHTML = info.employee_id;
-                document.getElementById("user-name").innerHTML = info.name;
-                document.getElementById("user-phone").innerHTML = info.phone_no;
-                document.getElementById("user-add").innerHTML = info.addr;
-                document.getElementById("user-status").innerHTML = JSON.parse(this.response).message;
-                document.getElementById("user-empl-name").innerHTML = info.employer_name;
-                document.getElementById("user-mort-val").innerHTML = info.mortgageValue;
-                document.getElementById("mort-id").innerHTML = info.m1sid;
-                document.getElementById('home').style.display='none';
-                document.getElementById('app-table').style.display='block';
-                document.getElementById('appErr').style.display='none';
-               
-
-            }else if(this.readyState === XMLHttpRequest.DONE && ( this.status === 400 || this.status === 401 || this.status === 500)) {
-            	console.log(this.response);
-            	document.getElementById("form-response-error").innerHTML = "Error : " + JSON.parse(this.response).message;
-            	document.getElementById('appErr').style.display='block';
-            }
+    <style>
+        .page-header {
+            text-align: center;
+            background: bisque;
         }
-        xhr.send();
-        
-    }
 
- </script>
+        .form {
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        .table-container {
+            width: 50%;
+            text-align: center;
+            margin-left: 25%;
+        }
+
+        #appErr {
+            width: 50%;
+            margin-left: 25%;
+        }
+    </style>
+
+    <script>
+        function loginBMR() {
+
+            var mbrid = document.getElementById("mbrid").value;
+            var endpoint = "https://rockers-mbr.eastus2.cloudapp.azure.com/application/status?mortId=" + mbrid;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", endpoint);
+
+            xhr.setRequestHeader("Content-Type", "application/json; utf-8");
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+
+                    var info = JSON.parse(this.response).status;
+
+                    document.getElementById("user-id").innerHTML = info.employee_id;
+                    document.getElementById("user-name").innerHTML = info.name;
+                    document.getElementById("user-phone").innerHTML = info.phone_no;
+                    document.getElementById("user-add").innerHTML = info.addr;
+                    document.getElementById("user-status").innerHTML = JSON.parse(this.response).message;
+                    document.getElementById("user-empl-name").innerHTML = info.employer_name;
+                    document.getElementById("user-mort-val").innerHTML = info.mortgageValue;
+                    document.getElementById("mort-id").innerHTML = info.m1sid;
+                    document.getElementById('home').style.display = 'none';
+                    document.getElementById('app-table').style.display = 'block';
+                    document.getElementById('appErr').style.display = 'none';
+
+
+                } else if (this.readyState === XMLHttpRequest.DONE && (this.status === 400 || this.status === 401 || this.status === 500)) {
+                    console.log(this.response);
+                    document.getElementById("form-response-error").innerHTML = "Error : " + JSON.parse(this.response).message;
+                    document.getElementById('appErr').style.display = 'block';
+                }
+            }
+            xhr.send();
+
+        }
+
+    </script>
 </head>
+
 <body>
-	<div class = "page-header"><h1 class="h1 mb-4">Welcome to MBR</h1></div>
-				<div class="tab-pane fade show active" id="home" role="tabpanel"
-				aria-labelledby="home-tab">
-				<!-- Default form login -->
-				<div class="text-center border border-light p-5 form" modelAttribute="userLogin">
+    <div class="page-header">
+        <h1 class="h1 mb-4">Welcome to MBR</h1>
+    </div>
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <!-- Default form login -->
+        <div class="text-center border border-light p-5 form" modelAttribute="userLogin">
 
-					<p class="h4 mb-4">Retrive Application Status</p>
-					<div class="form-field">
+            <p class="h4 mb-4">Retrive Application Status</p>
+            <div class="form-field">
 
-						<!-- Email -->
-						<div class="form-input">
-							<input type="text" id="mbrid"
-								class="form-control mb-4" placeholder="Mortgage Id" name="mbrid">
-						</div>
+                <!-- Email -->
+                <div class="form-input">
+                    <input type="text" id="mbrid" class="form-control mb-4" placeholder="Mortgage Id" name="mbrid">
+                </div>
 
-						<div class="d-flex justify-content-around"></div>
+                <div class="d-flex justify-content-around"></div>
 
-						<!-- Sign in button -->
-						<div class="form-input">
-							<button class="btn btn-info btn-block my-4" type="submit" onclick="loginBMR()">Login</button>
-						</div>
+                <!-- Sign in button -->
+                <div class="form-input">
+                    <button class="btn btn-info btn-block my-4" type="submit" onclick="loginBMR()">Login</button>
+                </div>
 
-					</div>
-				</div>
-			</div>
+            </div>
+        </div>
+    </div>
 
-			<div class="table-container" style="display: none" id="app-table">
-				<div class="h4 mb-4">Your Application</div>
-				<table class="table table-striped">
-				  <tbody>
-				    <tr>
-				      <th scope="row">Name</th>
-				      <td id="user-name"></td>
-				    </tr>
-				    <tr>
-				      <th scope="row">Phone</th>
-				      <td id="user-phone"></td>
-				    </tr>
-				    <tr>
-				      <th scope="row">Address</th>
-				      <td id="user-add"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Id</th>
-                        <td id="user-id"></td>
-                    </tr>
-                    <tr>
-				      <th scope="row">Employer Name</th>
-				      <td id="user-empl-name"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Mortgage Value</th>
-                        <td id="user-mort-val"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">M1Sid</th>
-                        <td id="mort-id"></td>
-                      </tr>
-				    <tr>
-				      <th scope="row">Status</th>
-				      <td id="user-status"></td>
-				    </tr>
-				  </tbody>
-				</table>
-				<button class="btn btn-danger" type="submit" onclick="window.location.href = '/mbrstatus';">Back</button>
-				
-			</div>
+    <div class="table-container" style="display: none" id="app-table">
+        <div class="h4 mb-4">Your Application</div>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td id="user-name"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone</th>
+                    <td id="user-phone"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td id="user-add"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td id="user-id"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Employer Name</th>
+                    <td id="user-empl-name"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Mortgage Value</th>
+                    <td id="user-mort-val"></td>
+                </tr>
+                <tr>
+                    <th scope="row">M1Sid</th>
+                    <td id="mort-id"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td id="user-status"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-danger" type="submit" onclick="window.location.href = '/mbrstatus';">Back</button>
 
-			<div style ='display: none'class="alert alert-danger alert-dismissible fade show" id="appErr">
-							<strong>Error!</strong>
-							<div id= "form-response-error" ></div>
-				</div>
+    </div>
+
+    <div style='display: none' class="alert alert-danger alert-dismissible fade show" id="appErr">
+        <strong>Error!</strong>
+        <div id="form-response-error"></div>
+    </div>
 </body>
+
 </html>

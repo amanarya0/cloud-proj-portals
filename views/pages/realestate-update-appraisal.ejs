@@ -2,122 +2,124 @@
 <html>
 
 <head>
-  <title></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-  <style>
-    .page-header {
-      text-align: center;
-      background: bisque;
-    }
-
-    .form {
-      width: 50%;
-      margin-left: 25%;
-    }
-
-    #appErr,
-    #appSuc {
-      width: 50%;
-      margin-left: 25%;
-    }
-  </style>
-  <script>
-    function applyBMR() {
-      var endpoint = 'http://rockers-realestate.southcentralus.cloudapp.azure.com/appraisal/complete';
-
-      var appraisalValue = document.getElementById("appval").value;
-      var mortid = document.getElementById("mortVal").value;
-      var comments = document.getElementById("comments").value;
-
-      var params = { "appraisalValue": appraisalValue, "mortid": mortid, "comments": comments };
-
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", endpoint, true);
-
-
-      xhr.setRequestHeader("Content-Type", "application/json; utf-8");
-
-      xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          document.getElementById("form-response-success").innerHTML = "Sucess : " + JSON.parse(this.response).message;
-          document.getElementById('appErr').style.display = 'none';
-          document.getElementById('appSuc').style.display = 'block';
-        } else if (this.readyState === XMLHttpRequest.DONE && (this.status === 409 || this.status === 500)) {
-          document.getElementById("form-response-error").innerHTML = "Error$ : " + JSON.parse(this.response).message;
-          document.getElementById('appSuc').style.display = 'none';
-          document.getElementById('appErr').style.display = 'block';
-        } else if (this.readyState === XMLHttpRequest.DONE && (this.status === 400)) {
-          document.getElementById("form-response-error").innerHTML = "Error : " + JSON.parse(this.response).message;
-          document.getElementById('appSuc').style.display = 'none';
-          document.getElementById('appErr').style.display = 'block';
+    <style>
+        .page-header {
+            text-align: center;
+            background: bisque;
         }
-      }
-      xhr.send(JSON.stringify(params));
-    }
 
-  </script>
+        .form {
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        #appErr,
+        #appSuc {
+            width: 50%;
+            margin-left: 25%;
+        }
+    </style>
+    <script>
+        function applyBMR() {
+            var endpoint = 'http://rockers-realestate.southcentralus.cloudapp.azure.com/appraisal/complete';
+
+            var appraisalValue = document.getElementById("appval").value;
+            var mortid = document.getElementById("mortVal").value;
+            var comments = document.getElementById("comments").value;
+
+            var params = { "appraisalValue": appraisalValue, "mortid": mortid, "comments": comments };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", endpoint, true);
+
+
+            xhr.setRequestHeader("Content-Type", "application/json; utf-8");
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    document.getElementById("form-response-success").innerHTML = "Sucess : " + JSON.parse(this.response).message;
+                    document.getElementById('appErr').style.display = 'none';
+                    document.getElementById('appSuc').style.display = 'block';
+                } else if (this.readyState === XMLHttpRequest.DONE && (this.status === 409 || this.status === 500)) {
+                    document.getElementById("form-response-error").innerHTML = "Error$ : " + JSON.parse(this.response).message;
+                    document.getElementById('appSuc').style.display = 'none';
+                    document.getElementById('appErr').style.display = 'block';
+                } else if (this.readyState === XMLHttpRequest.DONE && (this.status === 400)) {
+                    document.getElementById("form-response-error").innerHTML = "Error : " + JSON.parse(this.response).message;
+                    document.getElementById('appSuc').style.display = 'none';
+                    document.getElementById('appErr').style.display = 'block';
+                }
+            }
+            xhr.send(JSON.stringify(params));
+        }
+
+    </script>
 </head>
 
 <body>
-  <div class="page-header">
-    <h1 class="h1 mb-4">Welcome to MBR</h1>
-  </div>
-  <div id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-    <div class="text-center border border-light p-5 form">
-
-      <p class="h4 mb-4">Realestate Appraisal Form</p>
-      <div class="form-field">
-
-
-        <!-- Appraisal Value -->
-        <div class="form-input">
-          <input type="text" id="appval" class="form-control mb-4" placeholder="Appraisal Value" name="appval">
-        </div>
-
-        <!-- Mortgage Value -->
-        <div class="form-input">
-          <input type="text" id="mortVal" class="form-control mb-4" placeholder="Mortgage Value" name="mortVal">
-        </div>
-
-
-        <!-- Comments -->
-        <div class="form-input">
-          <input type="text" id="comments" class="form-control mb-4" placeholder="Comments" name="comments">
-        </div>
-
-
-        <!-- Submit button -->
-        <div class="form-input">
-          <button class="btn btn-info btn-block my-4" type="submit" onclick="applyBMR()">Submit</button>
-        </div>
-      </div>
+    <div class="page-header">
+        <h1 class="h1 mb-4">Welcome to MBR</h1>
     </div>
+    <div id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-    <div style='display: none' class="alert alert-danger alert-dismissible fade show" id="appErr">
-      <strong>Error!</strong>
-      <div id="form-response-error"></div>
+        <div class="text-center border border-light p-5 form">
+
+            <p class="h4 mb-4">Realestate Appraisal Form</p>
+            <div class="form-field">
+
+
+                <!-- Appraisal Value -->
+                <div class="form-input">
+                    <input type="text" id="appval" class="form-control mb-4" placeholder="Appraisal Value"
+                        name="appval">
+                </div>
+
+                <!-- Mortgage Value -->
+                <div class="form-input">
+                    <input type="text" id="mortVal" class="form-control mb-4" placeholder="Mortgage Value"
+                        name="mortVal">
+                </div>
+
+
+                <!-- Comments -->
+                <div class="form-input">
+                    <input type="text" id="comments" class="form-control mb-4" placeholder="Comments" name="comments">
+                </div>
+
+
+                <!-- Submit button -->
+                <div class="form-input">
+                    <button class="btn btn-info btn-block my-4" type="submit" onclick="applyBMR()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div style='display: none' class="alert alert-danger alert-dismissible fade show" id="appErr">
+            <strong>Error!</strong>
+            <div id="form-response-error"></div>
+        </div>
+
+        <div style='display: none' class="alert alert-success alert-dismissible fade show" id="appSuc">
+            <strong>Success!</strong>
+            <div id="form-response-success"></div>
+        </div>
+
+
+
     </div>
-
-    <div style='display: none' class="alert alert-success alert-dismissible fade show" id="appSuc">
-      <strong>Success!</strong>
-      <div id="form-response-success"></div>
-    </div>
-
-
-
-  </div>
 
 </body>
 
