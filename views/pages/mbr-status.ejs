@@ -42,7 +42,7 @@
         function loginBMR() {
 
             var mbrid = document.getElementById("mbrid").value;
-            var endpoint = "https://rockers-mbr.eastus2.cloudapp.azure.com/application/status?mortId=" + mbrid;
+            var endpoint = "http://rockers-mbr.eastus2.cloudapp.azure.com/application/status?mortId=" + mbrid;
 
             var xhr = new XMLHttpRequest();
             xhr.open("GET", endpoint);
