@@ -56,7 +56,7 @@
 
             xhr.onreadystatechange = function () {
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    document.getElementById("form-response-success").innerHTML = "Sucess : " + JSON.parse(this.response).message;
+                    document.getElementById("form-response-success").innerHTML = "Sucess : " + JSON.parse(this.response).message + "<br> Use the below ID to log into the Broker Portal at <a href=\"/mbrstatus\">https://project-portals.herokuapp.com/mbrstatus</a>";
                     document.getElementById("mortgage-id").innerHTML = "Mortgage Id : " + JSON.parse(this.response).appDetails.mort_id;
                     document.getElementById('appErr').style.display = 'none';
                     document.getElementById('appSuc').style.display = 'block';
